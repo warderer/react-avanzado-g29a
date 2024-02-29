@@ -12,7 +12,7 @@ const schema = yup.object({
     password: yup.string().required('Te falto el campo de password.')
       .min(8, 'Password is too short - should be 8 chars minimum.')
       .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%.^&*])/, 'La contraseña debe tener al menos 8 caracteres, un número, una letra mayúscula, una letra minúscula y un caracter especial'),
-    genre: yup
+    gender: yup
       .mixed()
       .oneOf(['M', 'F', 'O'], 'Selecciona un genero: Hombre, Mujer u Otro')
       .defined()
@@ -81,7 +81,7 @@ const ReactHookForm = () => {
             <option value='F'>Femenino</option>
             <option value='O'>Otro</option>
           </select>
-           {errors.age && <span>{errors.age.message}</span>}
+           {errors.gender && <span>{errors.gender.message}</span>}
 
           <label htmlFor='email'>Email</label>
           <input
