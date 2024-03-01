@@ -1,27 +1,19 @@
-import { useState, useEffect } from 'react'
+import { useSongContext } from '@/hooks/useSongContext'
 import './songlist.css'
-// Usamos la @ para no tener que poner ../../
-// import canciones from '../../assets/listaCanciones.json'
-import canciones from '@/assets/listaCanciones.json'
 
 const SongList = () => {
-  const [list, setList] = useState([])
-  const [loading, setLoading] = useState(true)
-
-  // Simulo la llamada a la API
-  useEffect(() => {
-    setTimeout(() => {
-      setList(canciones)
-      setLoading(false)
-    }, 2000)
-  }, [])
+  const { list, loading, setSelectedSong } = useSongContext()
 
   return (
     <section className='row-container'>
       {loading
         ? <h1>Cargando...</h1>
         : list.map((song) => (
-          <div key={song.id} className='row-song'>
+          <div
+            key={song.id}
+            className='row-song'
+            onClick={() => setSelectedSong(song)}
+          >
             <h3>{song.title}</h3>
             <p>{song.artist}</p>
           </div>
