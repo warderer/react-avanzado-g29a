@@ -1,31 +1,62 @@
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import logo from '@/assets/react.svg'
 import '@/styles/form.css'
+import { registerUserServices } from '@/services/userServices'
 
 const Signup = () => {
+  const navigate = useNavigate()
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm()
+
+  const onSubmit = async (data) => {
+    try {
+      const {status} = await registerUserServices(data)
+
+      if (status === 201) {
+        navigate('/login')
+      }
+    } catch (error) {
+      alert('Error al registrar el usuario')
+      console.log(error)
+    }
+  }
+
   return (
     <main className='form-signin w-100 m-auto'>
-      <form onSubmit={() => {} /* HANDLE SUBMIT */} data-bitwarden-watching='1'>
+      <form onSubmit={handleSubmit(onSubmit)} data-bitwarden-watching='1'>
         <img className='mb-4' src={logo} alt='' width='72' height='57' />
         <div className='form-floating'>
           <input
             type='text'
             className='form-control'
-            id='name'
-            placeholder='name@example.com'
+            id='first_name'
+            placeholder='Name'
+            {...register('first_name', { required: true })}
           />
-          <label htmlFor='name'>Nombre</label>
+          <label htmlFor='first_name'>Nombre</label>
         </div>
         <div className='form-floating'>
           <input
             type='text'
             className='form-control'
-            id='lastname'
-            placeholder='name@example.com'
+            id='last_name'
+            placeholder='Last name'
+            {...register('last_name', { required: true })}
           />
-          <label htmlFor='lastname'>Last name</label>
+          <label htmlFor='last_name'>Last name</label>
         </div>
         <div className='form-floating'>
-          <select className='form-select' id='gender' name='gender'>
+          <select
+            className='form-select'
+            id='gender'
+            name='gender'
+            {...register('gender', { required: true })}
+          >
             <option value=''>Choose...</option>
             <option value='M'>Male</option>
             <option value='F'>Female</option>
@@ -39,6 +70,7 @@ const Signup = () => {
             id='email'
             name='email'
             placeholder='name@example.com'
+            {...register('email', { required: true })}
           />
           <label htmlFor='email'>Email address</label>
         </div>
@@ -49,11 +81,17 @@ const Signup = () => {
             id='password'
             name='password'
             placeholder='Password'
+            {...register('password', { required: true })}
           />
           <label htmlFor='password'>Password</label>
         </div>
         <div className='form-floating'>
-          <select className='form-select' id='role' name='role'>
+          <select
+            className='form-select'
+            id='role'
+            name='role'
+            {...register('role', { required: true })}
+          >
             <option value=''>Choose...</option>
             <option value='ADMIN'>Admin</option>
             <option value='CUSTOMER'>Customer</option>
