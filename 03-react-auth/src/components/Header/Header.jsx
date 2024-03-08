@@ -1,24 +1,32 @@
+import { NavLink } from 'react-router-dom'
 import './header.scss'
 
 const Header = () => {
+  // Comparamos si el link está activo o no, con ayuda del NavLink
+  const linkIsActive = ({ isActive, isPending }) => {
+    return isActive ? 'header__item-link header__item-link--is-active' : 'header__item-link'
+  }
+
+  // Documentación de NavLink
+  // https://reactrouter.com/en/main/components/nav-link
   return (
     <nav className='header'>
-      <a className='header__logo' href='/'>Logo</a>
+      <NavLink className='header__logo' to='/'>Logo</NavLink>
       <ul className='header__nav-list'>
         <li className='header__list-item'>
-          <a className='header__item-link' href='/home'>Home</a>
+          <NavLink className={linkIsActive} to='/home'>Home</NavLink>
         </li>
         <li className='header__list-item'>
-          <a className='header__item-link' href='/dashboard'>Dashboard</a>
+          <NavLink className={linkIsActive} to='/dashboard'>Dashboard</NavLink>
         </li>
         <li className='header__list-item'>
-          <a className='header__item-link' href='/login'>Login</a>
+          <NavLink className={linkIsActive} to='/login'>Login</NavLink>
         </li>
         <li className='header__list-item'>
-          <a className='header__item-link' href='/secret'>Secret</a>
+          <NavLink className={linkIsActive} to='/secret'>Secret</NavLink>
         </li>
         <li className='header__list-item'>
-          <a className='header__item-link' href='/signup'>Signup</a>
+          <NavLink className={linkIsActive} to='/signup'>Signup</NavLink>
         </li>
       </ul>
     </nav>
