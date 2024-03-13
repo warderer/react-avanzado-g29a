@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getAllItemsService } from '@/services/itemServices'
+import { Link } from 'react-router-dom'
 
 const Home = () => {
   // Estado para guardar la información de los productos
@@ -34,7 +35,7 @@ const Home = () => {
               <h5 className='card-title'>{product.product_name}</h5>
               <p className='card-text'>{product.description}</p>
               {/* Aqui no se implementa el botón, pero basta con sustituir "a" por Link de react-router-dom y la ruta del enlace indicar el componente que mostrará la información de un solo producto, seguido del id del producto */}
-              <a href='#' className='btn btn-primary'>Comprar</a>
+              <Link to={`/product/${product.id}`} className='btn btn-primary'>Comprar</Link>
             </div>
           </div>
         ))}
