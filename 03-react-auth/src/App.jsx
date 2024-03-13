@@ -1,17 +1,18 @@
+import { AuthProvider } from '@/context/AuthContext'
 import { BrowserRouter } from 'react-router-dom'
-import './App.css'
 import RoutesIndex from './routes'
 import Header from './components/Header'
+import './App.css'
 
-
-function App() {
-
+function App () {
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <RoutesIndex />
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Header />
+          <RoutesIndex />
+        </BrowserRouter>
+      </AuthProvider>
     </>
   )
 }
