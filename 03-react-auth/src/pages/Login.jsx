@@ -17,7 +17,11 @@ const Login = () => {
       const response = await loginUserServices(data)
 
       if (response.status === 200) {
-        console.log(response.data)
+        // Guardarmos el token en el localstorage
+        // esta información permanece aún si se cierra el navegador
+        localStorage.setItem('token', response.data.token)
+
+        // console.log(response.data)
         navigate('/dashboard')
       }
     } catch (error) {
