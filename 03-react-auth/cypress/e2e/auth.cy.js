@@ -16,9 +16,11 @@ describe('Funcionalidad de Login', () => {
     cy.visit('/login')
 
     // 02. Act: Ejecutar acciones / interactuar con la App
-    cy.get('input[type="email"]').type('drstrange@marvel.com')
-    cy.get('input[type="password"]').type('multiverso')
-    cy.get('button[type="submit"]').click()
+    // cy.get('input[type="email"]').type('drstrange@marvel.com')
+    // cy.get('input[type="password"]').type('multiverso')
+    // cy.get('button[type="submit"]').click()
+    // Uso mi custom command Login
+    cy.login('drstrange@marvel.com', 'multiverso')
 
     cy.wait('@login') // Esperar a que la petición de login sea realizada
 
@@ -33,9 +35,10 @@ describe('Funcionalidad de Login', () => {
     cy.visit('/login')
 
     // 02. Act: Ejecutar acciones / interactuar con la App
-    cy.get('input[type="email"]').type('superman@dc.com')
-    cy.get('input[type="password"]').type('superman')
-    cy.get('button[type="submit"]').click()
+    // cy.get('input[type="email"]').type('superman@dc.com')
+    // cy.get('input[type="password"]').type('superman')
+    // cy.get('button[type="submit"]').click()
+    cy.login('superman@dc.com', 'superman')
 
     cy.wait('@login') // Esperar a que la petición de login sea realizada
 
