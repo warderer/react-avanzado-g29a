@@ -9,6 +9,9 @@ describe('Funcionalidad de Login', () => {
   })
 
   it('Probar que funciona Login como CUSTOMER', () => {
+    // Intercep lo uso para saber cuando una petición fue realizada y puedo esperarla con wait()
+    cy.intercept('POST', 'https://ecommerce-json-jwt.onrender.com/login').as('login')
+
     // 01. Arrange: Setup del estado de mi App
     cy.visit('/login')
 
@@ -16,6 +19,8 @@ describe('Funcionalidad de Login', () => {
     cy.get('input[type="email"]').type('drstrange@marvel.com')
     cy.get('input[type="password"]').type('multiverso')
     cy.get('button[type="submit"]').click()
+
+    cy.wait('@login') // Esperar a que la petición de login sea realizada
 
     cy.get('h1').contains('Dashboard') // 03. Assert: Verificar que la App se comporta como esperamos
   })
