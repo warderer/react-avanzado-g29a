@@ -20,6 +20,10 @@ jobs:
       run: npm install
       working-directory: ./03-react-auth
 
+    - name: Start development server
+      run: npm run dev
+      working-directory: ./03-react-auth
+
     - name: Run Cypress tests
       run: npm run cypress:run
       working-directory: ./03-react-auth
