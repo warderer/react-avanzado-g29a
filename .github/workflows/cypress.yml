@@ -21,7 +21,7 @@ jobs:
       working-directory: ./03-react-auth
 
     - name: Start development server
-      run: npm run dev
+      run: npm run dev &
       working-directory: ./03-react-auth
 
     - name: Run Cypress tests
