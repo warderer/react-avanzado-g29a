@@ -1,24 +1,21 @@
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Home, Dashboard, Login, Secret, Signup, ProductDetail } from '@/pages'
-import { useAuthContext } from '@/hooks/useAuthContext'
+import PrivateRoutes from '@/helpers/PrivateRoutes'
 
 const RoutesIndex = () => {
-  const { isAuth } = useAuthContext()
-
   return (
     <Routes>
       <Route path='/' element={<Home />} />
-      <Route
-        path='/dashboard'
-        element={isAuth ? <Dashboard /> : <Navigate to='/login' />}
-      />
       <Route path='/login' element={<Login />} />
-      <Route
-        path='/secret'
-        element={isAuth ? <Secret /> : <Navigate to='/login' />}
-      />
       <Route path='/signup' element={<Signup />} />
       <Route path='/product/:pid' element={<ProductDetail />} />
+
+      {/* RUTAS PRIVADAS */}
+      <Route element={<PrivateRoutes />}>
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/secret' element={<Secret />} />
+      </Route>
+
     </Routes>
   )
 }
