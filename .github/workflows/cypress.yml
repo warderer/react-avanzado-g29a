@@ -1,0 +1,23 @@
+name: Cypress Tests
+
+on:
+  push:
+    branches:
+      - main # Repository's default branch
+
+jobs:
+  cypress:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Go to project folder
+      run: cd 03-react-auth
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run Cypress tests
+      run: npm run cypress:run
